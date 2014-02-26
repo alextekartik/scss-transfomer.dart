@@ -1,4 +1,19 @@
+#
+# common dart
+#
 .DS_Store
 packages
 .project
 pubspec.lock
+build
+
+#
+# transformer
+#
+*_gen.css
+
+#
+# scss cache
+#
+.sass-cache
+

@@ -1,0 +1,6 @@
+/*
+ * Using txt extension so that it does not get compiled automatically
+ */
+
+test bad #
+syntax

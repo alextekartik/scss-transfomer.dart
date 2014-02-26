@@ -1,0 +1,11 @@
+name: tekartik_scss_transformer
+description: Simple scss transformer
+dependencies:
+  barback: any
+  markdown: any
+  path: any
+  logging: any
+dev_dependencies:
+  unittest: any
+transformers:
+- tekartik_scss_transformer

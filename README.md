@@ -6,7 +6,7 @@ Need local install of Sass compiler (through Ruby)
 
 The transformer logic is the following:
 * convert xxxx.scss file to xxxx.css
-* file starting with _xxxx.scss are not compiled however the style.scss in the same directoy is when changed
+* file starting with _xxxx.scss are not compiled however the style.scss in the same directoy is compiled when any _xxx.css file is changed
 
 ## Usage
 

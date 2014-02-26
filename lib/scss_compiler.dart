@@ -37,6 +37,9 @@ class ScssCompiler {
           rubyPath = pathElement;
         }
       });
+      if (rubyPath == null) {
+        throw 'ruby not installed - needed on windows';
+      }
       return _run(join(rubyPath, "ruby"), [join(rubyPath, "sass"), src, dst])
           .then((ProcessResult result) {
             var exitCode = result.exitCode;

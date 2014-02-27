@@ -17,19 +17,21 @@ class CompileScssTransformer extends Transformer with ScssCompiler {
   // Any markdown file with one of the following extensions is
   // converted to HTML.
   String get allowedExtensions => ".scss";
-  
+
   Future apply(Transform transform) {
-          //print(transform.primaryInput.id.path);
-      // The extension of the output is changed to "xxxx_gen.css".
-      AssetId inputId = transform.primaryInput.id;
-      
-      // For file starting with _ we build the file name style.scss in the same folder
-      if (basename(inputId.path).startsWith('_')) {
-        return compileScss(join(dirname(transform.primaryInput.id.path), STYLE_SCSS));
-      } else {
-        AssetId id = transform.primaryInput.id.changeExtension(SUFFIX_AND_EXTENSION);
-        return compileScss(transform.primaryInput.id.path, id.path);
-      }
-    
+    //print(transform.primaryInput.id.path);
+    // The extension of the output is changed to "xxxx_gen.css".
+    AssetId inputId = transform.primaryInput.id;
+
+    // For file starting with _ we build the file name style.scss in the same folder
+    if (basename(inputId.path).startsWith('_')) {
+      return compileScss(join(dirname(transform.primaryInput.id.path),
+          STYLE_SCSS));
+    } else {
+      AssetId id = transform.primaryInput.id.changeExtension(
+          SUFFIX_AND_EXTENSION);
+      return compileScss(transform.primaryInput.id.path, id.path);
+    }
+
   }
 }

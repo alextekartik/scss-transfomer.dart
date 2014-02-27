@@ -8,8 +8,8 @@ import 'package:logging/logging.dart';
 final String SUFFIX_AND_EXTENSION = '_gen.css';
 final String STYLE_SCSS = 'style.scss';
 
-Future _run(String executable,
-    List<String> arguments, { String workingDirectory, bool throwException: true}) {
+Future _run(String executable, List<String> arguments, {String
+    workingDirectory, bool throwException: true}) {
   if (arguments == null) {
     arguments = [];
   }
@@ -19,9 +19,10 @@ Future _run(String executable,
 class ScssCompiler {
   bool noPrint = false;
   Logger _log = new Logger('ScssCompiler');
-  
-  static sccFilenameToCssFilename(String src) => withoutExtension(src) + SUFFIX_AND_EXTENSION;
-  
+
+  static sccFilenameToCssFilename(String src) => withoutExtension(src) +
+      SUFFIX_AND_EXTENSION;
+
   Future compileScss(String src, [String dst]) {
     if (dst == null) {
       dst = sccFilenameToCssFilename(src);
@@ -40,24 +41,26 @@ class ScssCompiler {
       if (rubyPath == null) {
         throw 'ruby not installed - needed on windows';
       }
-      return _run(join(rubyPath, "ruby"), [join(rubyPath, "sass"), src, dst])
-          .then((ProcessResult result) {
-            var exitCode = result.exitCode;
-            
-            if (exitCode != 0) {
-              String out = result.stdout.trim();
-              String err = result.stderr.trim();
+      return _run(join(rubyPath, "ruby"), [join(rubyPath, "sass"), src, dst]
+          ).then((ProcessResult result) {
+        var exitCode = result.exitCode;
 
-              if (!noPrint) {
-                print('exitCode:${exitCode}\nERR:\n$err\nOUT:\n$out\ncompiling $src to $dst');
-              }
-              throw new Exception('exitCode:${exitCode}\nERR:\n$err\nOUT:\n$out\ncompiling $src to $dst');
-            }
-          });
+        if (exitCode != 0) {
+          String out = result.stdout.trim();
+          String err = result.stderr.trim();
+
+          if (!noPrint) {
+            print(
+                'exitCode:${exitCode}\nERR:\n$err\nOUT:\n$out\ncompiling $src to $dst');
+          }
+          throw new Exception(
+              'exitCode:${exitCode}\nERR:\n$err\nOUT:\n$out\ncompiling $src to $dst');
+        }
+      });
     } else {
       return _run("sass", [src, dst]).then((ProcessResult result) {
         var exitCode = result.exitCode;
-        
+
         if (exitCode != 0) {
           String out = result.stdout.trim();
           String err = result.stderr.trim();
@@ -65,7 +68,8 @@ class ScssCompiler {
           if (!noPrint) {
             print('exitCode:${exitCode}\nERR:\n$err\nOUT:\n$out');
           }
-          throw new Exception('exitCode:${exitCode}\nERR:\n$err\nOUT:\n$out\ncompiling $src to $dst');
+          throw new Exception(
+              'exitCode:${exitCode}\nERR:\n$err\nOUT:\n$out\ncompiling $src to $dst');
         }
       });
     }
